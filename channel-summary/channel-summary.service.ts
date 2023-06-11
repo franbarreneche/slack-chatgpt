@@ -4,7 +4,7 @@ import { Configuration, OpenAIApi } from "openai";
 
 export class ChannelSummaryService {
     private slackApi: WebClient;
-    private chatgtp: OpenAIApi;
+    private chatgpt: OpenAIApi;
 
     constructor() {
         if (!SLACK_TOKEN) {
@@ -20,7 +20,7 @@ export class ChannelSummaryService {
             organization: CHAT_GPT_ORGANIZATION,
             apiKey: CHAT_GPT_TOKEN,
         });
-        this.chatgtp = new OpenAIApi(chatGptConfig);
+        this.chatgpt = new OpenAIApi(chatGptConfig);
     }
 
     async generateChannelHistorySummary(channel?: string): Promise<string> {
@@ -41,7 +41,7 @@ export class ChannelSummaryService {
 
     private async generateChatGptSummary(channelHistory: ConversationsHistoryResponse) {
         const messages = this.prepareToSendToChatGpt(channelHistory);
-        const summary = await this.chatgtp.createChatCompletion({ model: CHAT_GPT_MODEL, messages: messages as any, });
+        const summary = await this.chatgpt.createChatCompletion({ model: CHAT_GPT_MODEL, messages: messages as any, });
 
         return summary.data.choices[0].message.content;
     }
