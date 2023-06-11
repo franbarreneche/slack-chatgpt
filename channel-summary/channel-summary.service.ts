@@ -10,14 +10,17 @@ export class ChannelSummaryService {
         if (!SLACK_TOKEN) {
             throw new Error('SLACK_TOKEN is not defined');
         }
-        this.slackApi = new WebClient(SLACK_TOKEN);
+        if (!CHAT_GPT_TOKEN || !CHAT_GPT_ORGANIZATION) {
+            throw new Error('CHAT_GPT_TOKEN or CHAT_GPT_ORGANIZATION should be defined');        
+        }
 
-        const configuration = new Configuration({
+        this.slackApi = new WebClient(SLACK_TOKEN);
+        
+        const chatGptConfig = new Configuration({
             organization: CHAT_GPT_ORGANIZATION,
             apiKey: CHAT_GPT_TOKEN,
         });
-
-        this.chatgtp = new OpenAIApi(configuration);
+        this.chatgtp = new OpenAIApi(chatGptConfig);
     }
 
     async generateChannelHistorySummary(channel?: string): Promise<string> {
