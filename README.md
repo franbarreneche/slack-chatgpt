@@ -5,6 +5,11 @@
 Small function that generates a summary of a Slack channel history using ChatGPT.
 The feature is provided as a Rest API created with Azure Functions.
 
+## Requirements
+
+* The Slack token should have permissions to get a conversation history (https://api.slack.com/methods/conversations.history) and to join existing conversations (https://api.slack.com/methods/conversations.join). According to the documentation the usual procedure is to create a Slack app as a container for credentials (https://api.slack.com/tutorials/tracks/getting-a-token).
+* It is also required to have an OpenAi account with credit to perform queries to its api (since it is a paid service).
+
 ## Run in Local
 
 1. Install node16 and npm.
