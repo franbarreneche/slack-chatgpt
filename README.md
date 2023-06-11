@@ -1,4 +1,4 @@
-# Slack-ChatGTP
+# Slack-ChatGPT
 
 ## Introduction
 
