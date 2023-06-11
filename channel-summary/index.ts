@@ -3,16 +3,16 @@ import { ChannelSummaryService } from "./channel-summary.service";
 
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
     try {
-        const res = await (new ChannelSummaryService).run(context.req.query.channel);
+        const { channel } = context.req.query;
+        const summary = await (new ChannelSummaryService).run(channel);
 
         context.res = {
             status: 200,
             body: {
-                data: res
+                data: summary
             }
         };
     } catch (e: any) {
-        context.log(e);
         context.res = {
             status: 500,
             body: {
@@ -23,7 +23,6 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
             }
         }
     }
-
 };
 
 export default httpTrigger;
