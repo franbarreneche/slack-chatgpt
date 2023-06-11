@@ -4,7 +4,7 @@ import { ChannelSummaryService } from "./channel-summary.service";
 const httpTrigger: AzureFunction = async function (context: Context, req: HttpRequest): Promise<void> {
     try {
         const { channel } = context.req.query;
-        const summary = await (new ChannelSummaryService).run(channel);
+        const summary = await (new ChannelSummaryService).generateChannelHistorySummary(channel);
 
         context.res = {
             status: 200,
