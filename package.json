@@ -11,7 +11,8 @@
     "test": "echo \"No tests yet...\""
   },
   "dependencies": {
-    "@slack/web-api": "^6.8.1"
+    "@slack/web-api": "^6.8.1",
+    "openai": "^3.2.1"
   },
   "devDependencies": {
     "@azure/functions": "^3.0.0",
